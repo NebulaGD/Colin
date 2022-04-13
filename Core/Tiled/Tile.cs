@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Colin.Localizations;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +11,7 @@ namespace Colin.Core.Tiled
     /// <summary>
     /// 一块单独的瓦片.
     /// </summary>
-    public class Tile : IEmptyState, IEmptyCreate
+    public class Tile : ILocalizable , IEmptyState, IEmptyCreate , IAnimation
     {
         public bool Empty { get; set; } = true;
 
@@ -27,6 +29,17 @@ namespace Colin.Core.Tiled
         /// 获取该瓦片所在的瓦片地图.
         /// </summary>
         public TileMap? TileMap { get; internal set; }
+
+        public int CurrentFrameX { get; protected set; }
+
+        public int CurrentFrameY { get; protected set; }
+
+        public Rectangle Frame { get; protected set; }
+
+        public virtual Rectangle GetFrame( )
+        {
+            return new Rectangle( CurrentFrameX * Frame.Width, CurrentFrameY * Frame.Height, Frame.Width, Frame.Height );
+        }
 
         /// <summary>
         /// 在该物块所绑定的瓦片地图中的指定坐标放置该物块.
@@ -60,6 +73,16 @@ namespace Colin.Core.Tiled
         public virtual void CreateEmpty( )
         {
             Empty = true;
+        }
+
+        public virtual string GetName( )
+        {
+            return "Tile";
+        }
+
+        public virtual string GetInformation( )
+        {
+            return "A tile.";
         }
     }
 }

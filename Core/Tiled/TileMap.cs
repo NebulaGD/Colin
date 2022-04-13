@@ -24,8 +24,6 @@ namespace Colin.Core.Tiled
 
         public Tile[,]? Tiles { get; private set; }
 
-        public RenderTarget2D? RenderTarget { get; private set; }
-
         /// <summary>
         /// 初始化一个瓦片地图.
         /// </summary>
@@ -48,9 +46,6 @@ namespace Colin.Core.Tiled
             }
         }
 
-        public void SaveAsPng( string path )
-        {
-            RenderTarget.SaveAsPng( new StreamWriter( path ).BaseStream, RenderTarget.Width, RenderTarget.Height );
-        }
+
     }
 }

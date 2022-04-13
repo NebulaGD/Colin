@@ -33,7 +33,7 @@ namespace Colin.Core.Scenes
          protected override void Draw( SpriteBatch spriteBatch )
         {
             for ( int count = 0; count < ContentLayers.Count; count++ )
-                if ( !ContentLayers[ count ].Enable )
+                if ( !ContentLayers[ count ].Visable )
                     ContentLayers[ count ].Draw( HardwareInfo.GameTimeCache );
             base.Draw( spriteBatch );
         }

@@ -17,21 +17,24 @@ namespace Colin.Core.Scenes
         /// </summary>
         public Scene? Scene { get; internal set; }
 
-         public bool Enable { get; set; } = true;
+        public bool Enable { get; set; } = true;
 
-         public virtual void Initialize( )
+        public bool Visable { get; set; } = true;
+
+        public virtual void Initialize( )
         {
 
         }
 
-         public virtual void Draw( GameTime gameTime )
+        public virtual void Update( GameTime gameTime )
         {
 
         }
 
-         public virtual void Update( GameTime gameTime )
+        public virtual void Draw( GameTime gameTime )
         {
 
         }
+
     }
 }
