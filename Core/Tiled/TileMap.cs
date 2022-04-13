@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace Colin.Core.Tiled
 {
-    /// <para>[!] 对于固定地图, Colin建议你在初始化地图后执行 <seealso cref="SaveAsPng()"/> 将地图以.png格式保存后再绘制.</para>
-    /// <para>[!] 也许这样可以节省一些性能开销.</para>
     /// <summary>
     /// 瓦片地图.
     /// </summary>
