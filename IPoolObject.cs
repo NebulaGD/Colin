@@ -13,10 +13,6 @@ namespace Colin
     public interface IPoolObject
     {
         /// <summary>
-        /// 指示对象的非空状态.
-        /// </summary>
-        bool Empty { get; set; }
-        /// <summary>
         /// 指示该对象在活跃池中的索引.
         /// </summary>
         int ActiveIndex { get; set; }

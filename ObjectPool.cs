@@ -11,23 +11,19 @@ namespace Colin
     /// 表示一个针对 <seealso cref="IPoolObject"/> 的对象池.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ObjectPool<T> : IPoolObject where T : IPoolObject, new()
+    public class ObjectPool<T> : IEmptyState where T : IPoolObject, IEmptyState, new()
     {
-         public T[ ]? Objects { get; }
+        public T[ ]? Objects { get; }
 
-         public List<T>? ActiveList { get; }
+        public List<T>? ActiveList { get; }
 
-         public bool Empty { get; set; } = false;
+        public bool Empty { get; set; } = false;
 
-         public int ActiveIndex { get; set; } = -1;
-
-         public int PoolIndex { get; set; } = -1;
-
-         public ObjectPool( int poolSize )
+        public ObjectPool( int poolSize )
         {
             ActiveList = new List<T>( );
             Objects = new T[ poolSize ];
-            Span<T> ts = new Span<T>( );
+            Span<T> ts = Objects;
             T t = new T( );
             t.Empty = true;
             t.ActiveIndex = -1;
@@ -35,20 +31,24 @@ namespace Colin
             ts.Fill( new T( ) );
         }
 
-         public void Initialize( )
+        public void Initialize( )
         {
             for ( int count = 0; count < Objects.Length; count++ )
                 Objects[ count ].Initialize( );
         }
 
-         public void Update( GameTime gameTime )
+        public void Update( GameTime gameTime )
         {
+            if ( Empty )
+                return;
             for ( int count = 0; count < ActiveList.Count; count++ )
-                    ActiveList[ count ].Update( gameTime );
+                ActiveList[ count ].Update( gameTime );
         }
 
         public void Draw( GameTime gameTime )
         {
+            if ( Empty )
+                return;
             for ( int count = 0; count < ActiveList.Count; count++ )
                 ActiveList[ count ].Draw( gameTime );
         }
@@ -75,5 +75,6 @@ namespace Colin
                 element.Empty = true;
             }
         }
+
     }
 }

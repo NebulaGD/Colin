@@ -12,7 +12,7 @@ namespace Colin
     /// <summary>
     /// 提供游戏窗口中可进行逻辑刷新、纹理绘制的元素.
     /// </summary>
-    public abstract class EngineElement : ILocalizable , IPoolObject
+    public abstract class EngineElement : ILocalizable, IPoolObject, IEmptyState
     {
         /// <summary>
         /// 指示该元素是否进行逻辑刷新.
@@ -107,32 +107,32 @@ namespace Colin
         public Rectangle Rectangle
         { get { return new Rectangle( (int)PositionX, (int)PositionY, Width, Height ); } }
 
-         public bool Empty { get; set; } = true;
+        public bool Empty { get; set; } = true;
 
-         public int ActiveIndex { get; set; } = -1;
+        public int ActiveIndex { get; set; } = -1;
 
-         public int PoolIndex { get; set; } = -1;
+        public int PoolIndex { get; set; } = -1;
 
         /// <summary>
         /// 元素的颜色.
         /// </summary>
         public Color ElementColor;
 
-         public void Initialize( )
+        public void Initialize( )
         {
             _updateStarted = false;
             _drawStarted = false;
             Size = SetSize( );
             Initialization( );
         }
-         protected virtual void Initialization( )
+        protected virtual void Initialization( )
         {
 
         }
-         protected abstract Vector2 SetSize( );
+        protected abstract Vector2 SetSize( );
 
         bool _updateStarted;
-         public void Update( GameTime gameTime )
+        public void Update( GameTime gameTime )
         {
             if ( !Enable )
                 return;
@@ -149,22 +149,22 @@ namespace Colin
             if ( this != null )
                 PostUpdate( );
         }
-         protected virtual void UpdateStart( )
+        protected virtual void UpdateStart( )
         {
 
         }
-         protected virtual void PreUpdate( )
+        protected virtual void PreUpdate( )
         {
         }
-         protected virtual void Update( )
+        protected virtual void Update( )
         {
         }
-         protected virtual void PostUpdate( )
+        protected virtual void PostUpdate( )
         {
         }
 
         bool _drawStarted;
-         public void Draw( GameTime gameTime )
+        public void Draw( GameTime gameTime )
         {
             if ( !Visable )
                 return;
@@ -180,28 +180,33 @@ namespace Colin
             if ( this != null )
                 PostDraw( HardwareInfo.SpriteBatch );
         }
-         protected virtual void DrawStart( SpriteBatch spriteBatch )
+        protected virtual void DrawStart( SpriteBatch spriteBatch )
         {
 
         }
-         protected virtual void PreDraw( SpriteBatch spriteBatch )
+        protected virtual void PreDraw( SpriteBatch spriteBatch )
         {
         }
-         protected virtual void Draw( SpriteBatch spriteBatch )
+        protected virtual void Draw( SpriteBatch spriteBatch )
         {
         }
-         protected virtual void PostDraw( SpriteBatch spriteBatch )
+        protected virtual void PostDraw( SpriteBatch spriteBatch )
         {
         }
 
-         public virtual string GetName( )
+        public virtual string GetName( )
         {
             return "EngineElement";
         }
 
-         public virtual string GetInformation( )
+        public virtual string GetInformation( )
         {
             return "A engine element.";
+        }
+
+        public virtual void CreateEmpty( )
+        {
+            Empty = true;
         }
     }
 }
