@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace Colin.Core.Tiled
 
         public Tile[,]? Tiles { get; private set; }
 
+        public RenderTarget2D? RenderTarget { get; private set; }
+
         /// <summary>
         /// 初始化一个瓦片地图.
         /// </summary>
@@ -37,6 +40,7 @@ namespace Colin.Core.Tiled
             Width = width;
             Height = height;
             Tiles = new Tile[ Width, Height ];
+            RenderTarget = new RenderTarget2D( ISingle<Engine>.Instance.GraphicsDevice, TileWidth * Width, TileHeight * Height );
             foreach ( Tile tile in Tiles )
             {
                 tile.TileMap = this;
@@ -44,9 +48,9 @@ namespace Colin.Core.Tiled
             }
         }
 
-        internal void SaveAsPng( )
+        public void SaveAsPng( string path )
         {
-
+            RenderTarget.SaveAsPng( new StreamWriter( path ).BaseStream, RenderTarget.Width, RenderTarget.Height );
         }
     }
 }
