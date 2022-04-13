@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 namespace Colin.Core.Tiled
 {
     /// <summary>
-    /// 瓦片地图.
+    /// 一个区块.
     /// </summary>
-    public class TileMap
+    public class Chunk
     {
         public int TileWidth { get; private set; } = -1;
 
@@ -23,13 +24,13 @@ namespace Colin.Core.Tiled
         public Tile[,]? Tiles { get; private set; }
 
         /// <summary>
-        /// 初始化一个瓦片地图.
+        /// 初始化一个区块.
         /// </summary>
-        /// <param name="tileWidth">该瓦片地图中瓦片的宽度.</param>
-        /// <param name="tileHeight">该瓦片地图中瓦片的高度.</param>
-        /// <param name="width">该瓦片地图的宽度.</param>
-        /// <param name="height">该瓦片地图的高度.</param>
-        public TileMap( int tileWidth, int tileHeight, int width, int height )
+        /// <param name="tileWidth">该区块中瓦片的宽度.</param>
+        /// <param name="tileHeight">该区块中瓦片的高度.</param>
+        /// <param name="width">该区块的宽度.</param>
+        /// <param name="height">该区块的高度.</param>
+        public Chunk( int tileWidth, int tileHeight, int width, int height )
         {
             TileWidth = tileWidth;
             TileHeight = tileHeight;
@@ -38,11 +39,16 @@ namespace Colin.Core.Tiled
             Tiles = new Tile[ Width, Height ];
             foreach ( Tile tile in Tiles )
             {
-                tile.TileMap = this;
+                tile.Chunk = this;
                 tile.CreateEmpty( );
             }
         }
 
+        public virtual void Initialize( ) { }
+
+        public virtual void Update( GameTime gameTime ) { }
+
+        public virtual void Draw( GameTime gameTime ) { }
 
     }
 }
