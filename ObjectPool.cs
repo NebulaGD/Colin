@@ -42,7 +42,11 @@ namespace Colin
             if ( Empty )
                 return;
             for ( int count = 0; count < ActiveList.Count; count++ )
+            {
                 ActiveList[ count ].Update( gameTime );
+                if ( ActiveList[ count ].Empty )
+                    DormancyObject( ActiveList[ count ] );
+            }
         }
 
         public void Draw( GameTime gameTime )
@@ -53,13 +57,13 @@ namespace Colin
                 ActiveList[ count ].Draw( gameTime );
         }
 
-        public void ActiveObject( T poolObject )
+        public void ActiveObject( int index )
         {
-            if ( poolObject.Empty )
+            if ( Objects[ index ].Empty )
             {
-                poolObject.Empty = false;
-                poolObject.ActiveIndex = ActiveList.Count;
-                ActiveList.Add( poolObject );
+                Objects[ index ].Empty = false;
+                Objects[ index ].ActiveIndex = ActiveList.Count;
+                ActiveList.Add( Objects[ index ] );
             }
         }
 

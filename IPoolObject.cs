@@ -21,6 +21,14 @@ namespace Colin
         /// </summary>
         int PoolIndex { get; set; }
         /// <summary>
+        /// 在令对象活跃时执行.
+        /// </summary>
+        void OnActive( );
+        /// <summary>
+        /// 在令对象休眠时执行.
+        /// </summary>
+        void OnDormancy( );
+        /// <summary>
         /// 初始化对象.
         /// </summary>
         void Initialize( );

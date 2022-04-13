@@ -204,9 +204,13 @@ namespace Colin
             return "A engine element.";
         }
 
-        public virtual void CreateEmpty( )
+        public virtual void OnActive( )
         {
-            Empty = true;
+        }
+
+        public virtual void OnDormancy( )
+        {
+
         }
     }
 }

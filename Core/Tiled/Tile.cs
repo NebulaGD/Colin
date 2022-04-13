@@ -11,7 +11,7 @@ namespace Colin.Core.Tiled
     /// <summary>
     /// 一块单独的瓦片.
     /// </summary>
-    public class Tile : ILocalizable , IEmptyState, IEmptyCreate , IAnimation
+    public class Tile : ILocalizable , IEmptyState , IAnimation
     {
         public bool Empty { get; set; } = true;
 
@@ -62,18 +62,13 @@ namespace Colin.Core.Tiled
         /// </summary>
         public void Destruction( )
         {
-            Chunk.Tiles[ CoordinateX, CoordinateY ].CreateEmpty();
+            Chunk.Tiles[ CoordinateX, CoordinateY ].Empty = true;
             ModifyOnDestruction( );
         }
         /// <summary>
         /// 在该物块被破坏时执行.
         /// </summary>
         protected virtual void ModifyOnDestruction( ) { }
-
-        public virtual void CreateEmpty( )
-        {
-            Empty = true;
-        }
 
         public virtual string GetName( )
         {

@@ -18,7 +18,7 @@ namespace Colin
         /// <summary>
         /// 指示该 <seealso cref="Engine"/> 的目标帧数.
         /// </summary>
-        protected virtual int TargetFrame { get; } = 144;
+        public virtual int TargetFrame { get; } = 144;
 
         /// <summary>
         /// 指示该 <seealso cref="Engine"/> 的资产目录.
