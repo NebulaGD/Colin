@@ -38,7 +38,6 @@ namespace Colin.Core.Tiled
             Width = width;
             Height = height;
             Tiles = new Tile[ Width, Height ];
-            RenderTarget = new RenderTarget2D( ISingle<Engine>.Instance.GraphicsDevice, TileWidth * Width, TileHeight * Height );
             foreach ( Tile tile in Tiles )
             {
                 tile.TileMap = this;
