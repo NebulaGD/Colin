@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace Colin.Extensions
 {
-     public static class RectangleExtensions
+    public static class RectangleExtensions
     {
+        /// <summary>
+        /// 获取矩形下边缘的中心位置.
+        /// </summary>
+        public static Vector2 GetBottomCenter( this Rectangle rect )
+        {
+            return new Vector2( rect.X + rect.Width / 2.0f, rect.Bottom );
+        }
 
         /// <summary>
         /// 判断鼠标是否与指定的 <seealso cref="Rectangle"/> 重合.
