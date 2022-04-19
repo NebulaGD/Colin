@@ -17,12 +17,12 @@ namespace Colin
         /// <summary>
         /// 指示该元素是否进行逻辑刷新.
         /// </summary>
-        public virtual bool Enable { get; protected set; } = false;
+        public virtual bool Enable { get; protected set; } = true;
 
         /// <summary>
         /// 指示该元素是否进行绘制.
         /// </summary>
-        public virtual bool Visable { get; protected set; } = false;
+        public virtual bool Visable { get; protected set; } = true;
 
         /// <summary>
         /// 元素的旋转角度.
