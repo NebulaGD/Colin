@@ -37,10 +37,13 @@ namespace Colin.Core.Tiled
             Width = width;
             Height = height;
             Tiles = new Tile[ Width, Height ];
-            foreach ( Tile tile in Tiles )
+            for ( int x = 0; x < Width ; x++ )
             {
-                tile.Chunk = this;
-                tile.CreateEmpty( );
+                for ( int y = 0; y < Height; y++ )
+                {
+                    Tiles[ x, y ] = new Tile( );
+                    Tiles[ x, y ].Chunk = this;
+                }
             }
         }
 
