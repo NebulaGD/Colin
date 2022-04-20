@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Colin.Assets
 {
-    public class Loader
+    public static class Loader
     {
         /// <summary>
         /// 对程序内所有的 <seealso cref="ILoadable"/> 对象执行加载操作.

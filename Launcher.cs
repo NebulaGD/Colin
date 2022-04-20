@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Colin
 {
-    internal class TEST
+    internal class Launcher
     {
         public static void Main( )
         {
-            Engine engine = new Engine( );
-            engine.Run( );
+
         }
     }
 }

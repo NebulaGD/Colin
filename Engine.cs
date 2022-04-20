@@ -23,7 +23,7 @@ namespace Colin
         /// <summary>
         /// 指示该 <seealso cref="Engine"/> 的资产目录.
         /// </summary>
-        protected virtual string? ContentDirectory { get; } = "";
+        protected virtual string? ContentDirectory { get; } = "Contents";
 
         /// <summary>
         /// 用于该 <seealso cref="Engine"/> 的RenderTarget2D.

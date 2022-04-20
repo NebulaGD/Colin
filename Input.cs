@@ -167,6 +167,5 @@ namespace Colin
         {
             return KeyboardState.IsKeyUp( keys ) && KeyboardStateLast.IsKeyDown( keys );
         }
-
     }
 }
