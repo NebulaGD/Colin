@@ -21,11 +21,6 @@ namespace Colin
         public virtual int TargetFrame { get; } = 144;
 
         /// <summary>
-        /// 指示该 <seealso cref="Engine"/> 的资产目录.
-        /// </summary>
-        protected virtual string? ContentDirectory { get; } = "";
-
-        /// <summary>
         /// 用于该 <seealso cref="Engine"/> 的RenderTarget2D.
         /// </summary>
         public RenderTarget2D? EngineRenderTarget { get; internal set; }
@@ -52,7 +47,6 @@ namespace Colin
             IsFixedTimeStep = true;
             HardwareInfo.Graphics.SynchronizeWithVerticalRetrace = false;
             TargetElapsedTime = new TimeSpan( 0, 0, 0, 0, (int)Math.Round( 1000f / TargetFrame ) );
-            Content.RootDirectory = ContentDirectory;
         }
 
         protected override sealed void Initialize( )
