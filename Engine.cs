@@ -15,6 +15,8 @@ namespace Colin
     /// </summary>
     public class Engine : Game
     {
+        internal static Engine? Instance { get; private set; }
+
         /// <summary>
         /// 指示该 <seealso cref="Engine"/> 的目标帧数.
         /// </summary>
@@ -37,7 +39,7 @@ namespace Colin
 
         public Engine( )
         {
-            ISingle<Engine>._instance = this;
+            Instance = this;
             IsFixedTimeStep = true;
             HardwareInfo.Graphics = new GraphicsDeviceManager( this );
             HardwareInfo.Graphics.PreferHalfPixelOffset = true;
@@ -47,6 +49,7 @@ namespace Colin
             IsFixedTimeStep = true;
             HardwareInfo.Graphics.SynchronizeWithVerticalRetrace = false;
             TargetElapsedTime = new TimeSpan( 0, 0, 0, 0, (int)Math.Round( 1000f / TargetFrame ) );
+            Content.RootDirectory = "Contents";
         }
 
         protected override sealed void Initialize( )
@@ -66,7 +69,7 @@ namespace Colin
                     HardwareInfo.Graphics.GraphicsDevice,
                     HardwareInfo.Graphics.GraphicsDevice.Viewport.Width,
                     HardwareInfo.Graphics.GraphicsDevice.Viewport.Height );
-            ISingle<Engine>.Instance.Window.ClientSizeChanged += Window_ClientSizeChanged;
+           Engine.Instance.Window.ClientSizeChanged += Window_ClientSizeChanged;
             void Window_ClientSizeChanged( object? sender, EventArgs e )
             {
                 EngineRenderTarget = new RenderTarget2D(

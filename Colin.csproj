@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -12,7 +12,7 @@
     <Description>一个基于MonoGame的工具包.</Description>
     <Copyright>中华人民共和国深圳市埃坎达网络有限公司 版权所有</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>1.0.1.6</Version>
+    <Version>1.0.1.7</Version>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <PackageIcon>Icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/ColinWeiss/Colin</RepositoryUrl>

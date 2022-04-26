@@ -27,7 +27,7 @@ namespace Colin
                 HardwareInfo.Graphics.GraphicsDevice,
                 HardwareInfo.Graphics.GraphicsDevice.Viewport.Width,
                 HardwareInfo.Graphics.GraphicsDevice.Viewport.Height );
-            ISingle<Engine>.Instance.Window.ClientSizeChanged += Window_ClientSizeChanged;
+           Engine.Instance.Window.ClientSizeChanged += Window_ClientSizeChanged;
             void Window_ClientSizeChanged( object? sender, EventArgs e )
             {
                 RenderTarget = new RenderTarget2D(
@@ -103,6 +103,6 @@ namespace Colin
         {
         }
 
-         public EngineComponent( ) : base( ISingle<Engine>.Instance ) { }
+         public EngineComponent( ) : base(Engine.Instance ) { }
     }
 }

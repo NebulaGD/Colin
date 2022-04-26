@@ -8,8 +8,19 @@ namespace Colin.Graphics
     /// [单例] 屏幕渲染器.
     /// <para>一般用于为屏幕添加后处理效果.</para>
     /// </summary>
-    public sealed class ScreenRender : GameComponent, ISingle<ScreenRender>
+    public sealed class ScreenRender : GameComponent
     {
+        private static ScreenRender? _instance;
+        public static ScreenRender? Instance
+        {
+            get
+            {
+                if ( _instance == null )
+                    _instance = new ScreenRender( );
+                return _instance;
+            }
+        }
+
         /// <summary>
         /// 屏幕着色器的实例集合.
         /// </summary>
@@ -24,9 +35,9 @@ namespace Colin.Graphics
         {
             if ( !data.ForInternalOptimizationBoolen )
             {
-                if ( !ISingle<ScreenRender>.Instance.ScreenShaders.Contains( data ) )
+                if ( !Instance.ScreenShaders.Contains( data ) )
                 {
-                    ISingle<ScreenRender>.Instance.ScreenShaders.Add( data );
+                    Instance.ScreenShaders.Add( data );
                     data.ForInternalOptimizationBoolen = true;
                 }
             }
@@ -40,10 +51,10 @@ namespace Colin.Graphics
         /// <returns></returns>
         public static T GetScreenShaderData<T>( ) where T : ScreenShader, new()
         {
-            int num = ISingle<ScreenRender>.Instance.ScreenShaders.FindIndex( a => typeof( T ).FullName == a.GetType( ).FullName );
+            int num = Instance.ScreenShaders.FindIndex( a => typeof( T ).FullName == a.GetType( ).FullName );
             if ( num == -1 )
                 return null;
-            return ISingle<ScreenRender>.Instance.ScreenShaders[ num ] as T;
+            return Instance.ScreenShaders[ num ] as T;
         }
 
         /// <summary>
@@ -54,10 +65,10 @@ namespace Colin.Graphics
         /// <returns></returns>
         public static ScreenShader GetScreenShaderData( string screenShaderName )
         {
-            int num = ISingle<ScreenRender>.Instance.ScreenShaders.FindIndex( a => a.ScreenShaderName == screenShaderName );
+            int num = Instance.ScreenShaders.FindIndex( a => a.ScreenShaderName == screenShaderName );
             if ( num == -1 )
                 return null;
-            return ISingle<ScreenRender>.Instance.ScreenShaders[ num ];
+            return Instance.ScreenShaders[ num ];
         }
 
         /// <summary>
@@ -69,9 +80,9 @@ namespace Colin.Graphics
         {
             if ( data.ForInternalOptimizationBoolen )
             {
-                if ( !ISingle<ScreenRender>.Instance.ScreenShaders.Contains( data ) )
+                if ( !Instance.ScreenShaders.Contains( data ) )
                 {
-                    ISingle<ScreenRender>.Instance.ScreenShaders.Remove( data );
+                    Instance.ScreenShaders.Remove( data );
                     data.ForInternalOptimizationBoolen = false;
                 }
             }
@@ -92,29 +103,29 @@ namespace Colin.Graphics
         /// </summary>
         internal static void RenderFrame( GameTime gameTime )
         {
-            ISingle<Engine>.Instance.GraphicsDevice.SetRenderTarget( ISingle<Engine>.Instance.EngineRenderTargetSwap );
-            for ( int screenShaderCount = 0; screenShaderCount < ISingle<ScreenRender>.Instance.ScreenShaders.Count; screenShaderCount++ )
+           Engine.Instance.GraphicsDevice.SetRenderTarget(Engine.Instance.EngineRenderTargetSwap );
+            for ( int screenShaderCount = 0; screenShaderCount < Instance.ScreenShaders.Count; screenShaderCount++ )
             {
                 HardwareInfo.SpriteBatch.Begin( SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.AnisotropicClamp, DepthStencilState.None, RasterizerState.CullNone, null );
                 if ( Engine._engineRenderTargetSwitch )
                 {
-                    ISingle<ScreenRender>.Instance.ScreenShaders[ screenShaderCount ].ApplyPass( "ScreenPass" );
-                    HardwareInfo.SpriteBatch.Draw( ISingle<Engine>.Instance.EngineRenderTarget, Vector2.Zero, Color.White );
-                    ISingle<Engine>.Instance.GraphicsDevice.SetRenderTarget( ISingle<Engine>.Instance.EngineRenderTarget );
+                    Instance.ScreenShaders[ screenShaderCount ].ApplyPass( "ScreenPass" );
+                    HardwareInfo.SpriteBatch.Draw(Engine.Instance.EngineRenderTarget, Vector2.Zero, Color.White );
+                   Engine.Instance.GraphicsDevice.SetRenderTarget(Engine.Instance.EngineRenderTarget );
                 }
                 else
                 {
-                    ISingle<ScreenRender>.Instance.ScreenShaders[ screenShaderCount ].ApplyPass( "ScreenPass" );
-                    HardwareInfo.SpriteBatch.Draw( ISingle<Engine>.Instance.EngineRenderTargetSwap, Vector2.Zero, Color.White );
-                    ISingle<Engine>.Instance.GraphicsDevice.SetRenderTarget( ISingle<Engine>.Instance.EngineRenderTargetSwap );
+                    Instance.ScreenShaders[ screenShaderCount ].ApplyPass( "ScreenPass" );
+                    HardwareInfo.SpriteBatch.Draw(Engine.Instance.EngineRenderTargetSwap, Vector2.Zero, Color.White );
+                   Engine.Instance.GraphicsDevice.SetRenderTarget(Engine.Instance.EngineRenderTargetSwap );
                 }
-                if ( ISingle<ScreenRender>.Instance.ScreenShaders.Count > 1 )
+                if ( Instance.ScreenShaders.Count > 1 )
                     Engine._engineRenderTargetSwitch = !Engine._engineRenderTargetSwitch;
                 HardwareInfo.SpriteBatch.End( );
             }
         }
 
-         public ScreenRender( ) : base( ISingle<Engine>.Instance )
+         public ScreenRender( ) : base(Engine.Instance )
         {
             Engine._engineRenderTargetSwitch = true;
         }

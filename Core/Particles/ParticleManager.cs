@@ -108,7 +108,7 @@ namespace Colin.Core.Particles
                     Objects[ count ] = new Particle( );
                     Objects[ count ].Position = pos;
                     Objects[ count ].Velocity = vel;
-                    Objects[ count ].ActiveTime = ISingle<Engine>.Instance.TargetFrame;
+                    Objects[ count ].ActiveTime =Engine.Instance.TargetFrame;
                     Objects[ count ].Scale = 1f;
                     Objects[ count ].ElementColor = Color.White;
                     Objects[ count ].OnActive( );
@@ -132,7 +132,7 @@ namespace Colin.Core.Particles
                     Objects[ count ] = new Particle( );
                     Objects[ count ].Position = pos;
                     Objects[ count ].Velocity = Vector2.Zero;
-                    Objects[ count ].ActiveTime = ISingle<Engine>.Instance.TargetFrame;
+                    Objects[ count ].ActiveTime =Engine.Instance.TargetFrame;
                     Objects[ count ].Scale = 1f;
                     Objects[ count ].ElementColor = Color.White;
                     Objects[ count ].OnActive( );
