@@ -122,14 +122,12 @@ namespace Colin
         {
             _updateStarted = false;
             _drawStarted = false;
-            Size = SetSize( );
             Initialization( );
         }
         protected virtual void Initialization( )
         {
 
         }
-        protected abstract Vector2 SetSize( );
 
         bool _updateStarted;
         public void Update( GameTime gameTime )

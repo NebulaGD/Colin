@@ -18,8 +18,6 @@ namespace Colin.Core.Particles
         /// </summary>
         public float ActiveTime;
 
-        protected override Vector2 SetSize( ) => Vector2.Zero;
-
         protected override void Update( )
         {
             if ( ActiveTime <= 0 )
