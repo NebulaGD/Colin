@@ -57,6 +57,10 @@ namespace Colin
                 ActiveList[ count ].Draw( gameTime );
         }
 
+        /// <summary>
+        /// 令指定 <seealso cref="IPoolObject"/> 活跃.
+        /// </summary>
+        /// <param name="index"></param>
         public void ActiveObject( int index )
         {
             if ( Objects[ index ].Empty )

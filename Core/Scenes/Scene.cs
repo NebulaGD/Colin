@@ -25,7 +25,7 @@ namespace Colin.Core.Scenes
          protected override void Update( )
         {
             for ( int count = ContentLayers.Count - 1; count > 0; count++ )
-                if( !ContentLayers[ count ].Enable )
+                if( ContentLayers[ count ].Enable )
                     ContentLayers[ count ].Update( HardwareInfo.GameTimeCache );
             base.Update( );
         }
@@ -33,7 +33,7 @@ namespace Colin.Core.Scenes
          protected override void Draw( SpriteBatch spriteBatch )
         {
             for ( int count = 0; count < ContentLayers.Count; count++ )
-                if ( !ContentLayers[ count ].Visable )
+                if ( ContentLayers[ count ].Visable )
                     ContentLayers[ count ].Draw( HardwareInfo.GameTimeCache );
             base.Draw( spriteBatch );
         }
