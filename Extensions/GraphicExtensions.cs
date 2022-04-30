@@ -10,9 +10,5 @@ namespace Colin.Extensions
 {
     public static class GraphicExtensions
     {
-        public static void DrawLine( Vector2 start , Vector2 end )
-        {
-
-        }
     }
 }

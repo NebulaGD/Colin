@@ -128,7 +128,7 @@ namespace Colin.Core.UI
         /// <summary>
         /// 表示控件所属的执行器.
         /// </summary>
-        public BasicControlOperator? Manager { get; set; }
+        public ControlOperator? Manager { get; set; }
 
         /// <summary>
         /// 将一个具有指定引用的控件注册进该控件
@@ -367,7 +367,7 @@ namespace Colin.Core.UI
         }
         internal void MouseLeaveEvent( ) => OnMouseLeave?.Invoke( );
 
-         protected override void PreUpdate( )
+        protected override void PreUpdate( )
         {
             OldInteractive = Interactive;
             base.PreUpdate( );

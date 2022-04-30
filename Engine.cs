@@ -69,7 +69,7 @@ namespace Colin
                     HardwareInfo.Graphics.GraphicsDevice,
                     HardwareInfo.Graphics.GraphicsDevice.Viewport.Width,
                     HardwareInfo.Graphics.GraphicsDevice.Viewport.Height );
-           Engine.Instance.Window.ClientSizeChanged += Window_ClientSizeChanged;
+            Window.ClientSizeChanged += Window_ClientSizeChanged;
             void Window_ClientSizeChanged( object? sender, EventArgs e )
             {
                 EngineRenderTarget = new RenderTarget2D(
@@ -81,8 +81,14 @@ namespace Colin
                     HardwareInfo.Graphics.GraphicsDevice.Viewport.Width,
                     HardwareInfo.Graphics.GraphicsDevice.Viewport.Height );
             }
+            Initialization( );
             Components.Add( InitializeScene( ) );
             base.Initialize( );
+        }
+
+        protected virtual void Initialization( )
+        {
+
         }
 
         /// <summary>

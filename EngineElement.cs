@@ -12,7 +12,7 @@ namespace Colin
     /// <summary>
     /// 提供游戏窗口中可进行逻辑刷新、纹理绘制的元素.
     /// </summary>
-    public abstract class EngineElement : ILocalizable, IPoolObject, IEmptyState
+    public abstract class EngineElement : IElement2D , ILocalizable, IPoolObject, IEmptyState
     {
         /// <summary>
         /// 指示该元素是否进行逻辑刷新.
@@ -34,15 +34,9 @@ namespace Colin
         /// </summary>
         public Vector2 RotationCenter;
 
-        /// <summary>
-        /// 元素的横坐标
-        /// </summary>
         public float PositionX
         { get { return Position.X; } set { Position.X = value; } }
 
-        /// <summary>
-        /// 元素的纵坐标
-        /// </summary>
         public float PositionY
         { get { return Position.Y; } set { Position.Y = value; } }
 
@@ -57,22 +51,16 @@ namespace Colin
         public Vector2 Center
         { get { return Position + Size / 2; } }
 
-        /// <summary>
-        /// 元素的宽
-        /// </summary>
         public int Width
         { get { return (int)Size.X; } set { Size.X = value; } }
 
-        /// <summary>
-        /// 元素的高
-        /// </summary>
         public int Height
         { get { return (int)Size.Y; } set { Size.Y = value; } }
 
         /// <summary>
         /// 元素的缩放.
         /// </summary>
-        public float Scale = 1f;
+        public float Scale { get; set; } = 1f;
 
         /// <summary>
         /// 元素的长宽.
@@ -84,15 +72,9 @@ namespace Colin
         /// </summary>
         public Vector2 Half => Size / 2;
 
-        /// <summary>
-        /// 元素的横向分速度
-        /// </summary>
         public float VelocityX
         { get { return Velocity.X; } set { Velocity.X = value; } }
 
-        /// <summary>
-        /// 元素的纵向分速度
-        /// </summary>
         public float VelocityY
         { get { return Velocity.Y; } set { Velocity.Y = value; } }
 
@@ -116,7 +98,7 @@ namespace Colin
         /// <summary>
         /// 元素的颜色.
         /// </summary>
-        public Color ElementColor;
+        public Color ElementColor = Color.White;
 
         public void Initialize( )
         {
@@ -192,15 +174,11 @@ namespace Colin
         {
         }
 
-        public virtual string GetName( )
-        {
-            return "EngineElement";
-        }
+        public virtual string GetName => "EngineElement";
 
-        public virtual string GetInformation( )
-        {
-            return "A engine element.";
-        }
+
+        public virtual string GetInformation => "A engine element.";
+        
 
         public virtual void OnActive( )
         {

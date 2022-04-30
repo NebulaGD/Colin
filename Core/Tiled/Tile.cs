@@ -70,14 +70,8 @@ namespace Colin.Core.Tiled
         /// </summary>
         protected virtual void ModifyOnDestruction( ) { }
 
-        public virtual string GetName( )
-        {
-            return "Tile";
-        }
+        public virtual string GetName => "Tile";
 
-        public virtual string GetInformation( )
-        {
-            return "A tile.";
-        }
+        public virtual string GetInformation => "A tile.";
     }
 }

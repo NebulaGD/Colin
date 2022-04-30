@@ -5,7 +5,7 @@ namespace Colin.Core.UI
     /// <summary>
     /// 表示一个控件执行器
     /// </summary>
-    public class BasicControlOperator : EngineComponent
+    public class ControlOperator : EngineComponent
     {
         /// <summary>
         /// 该执行器内的元素列表
@@ -51,46 +51,39 @@ namespace Colin.Core.UI
             for ( int Count = 0; Count < Controls.Count; Count++ )
                 Controls[ Count ].Initialize( );
         }
-
-         protected override void Update( )
+        private BasicControl? _seekControl;
+        protected override void Update( )
         {
             base.Update( );
-            OldAtControl = ControlSeekAt( );
+            OldAtControl = _seekControl;
+            _seekControl = ControlSeekAt( );
             for ( int Count = 0; Count < Controls.Count; Count++ )
                 Controls[ Count ].Update( HardwareInfo.GameTimeCache );
-            BasicControl control = ControlSeekAt( );
-            if ( control != null && control.Enable )
+            if ( _seekControl != null && _seekControl.Enable )
             {
-                if ( control != null )
-                {
-                    if ( control.Interactive && Input.MouseLeftClick )
-                        control.MouseLeftClickEvent( );
-                    else if ( control.Interactive && Input.MouseLeftPressed )
-                        control.MouseLeftPressedEvent( );
-                    else if ( control.Interactive && Input.MouseLeftUp )
-                        control.MouseLeftUpEvent( );
-                    if ( control != null )
-                    {
-                        if ( control.Interactive && Input.MouseRightUp )
-                            control.MouseRightUpEvent( );
-                        else if ( control.Interactive && Input.MouseRightPressed )
-                            control.MouseRightPressedEvent( );
-                        else if ( control.Interactive && Input.MouseRightUp )
-                            control.MouseRightUpEvent( );
-                        if ( control.Interactive )
-                            control.MouseHoverEvent( );
-                        if ( control != null )
-                            if ( control.Interactive && !control.OldInteractive )
-                                control.MouseIntoEvent( );
-                    }
-                }
+                if ( _seekControl.Interactive && Input.MouseLeftClick )
+                    _seekControl.MouseLeftClickEvent( );
+                else if ( _seekControl.Interactive && Input.MouseLeftPressed )
+                    _seekControl.MouseLeftPressedEvent( );
+                else if ( _seekControl.Interactive && Input.MouseLeftUp )
+                    _seekControl.MouseLeftUpEvent( );
+                if ( _seekControl.Interactive && Input.MouseRightUp )
+                    _seekControl.MouseRightUpEvent( );
+                else if ( _seekControl.Interactive && Input.MouseRightPressed )
+                    _seekControl.MouseRightPressedEvent( );
+                else if ( _seekControl.Interactive && Input.MouseRightUp )
+                    _seekControl.MouseRightUpEvent( );
+                if ( _seekControl.Interactive )
+                    _seekControl.MouseHoverEvent( );
+                if ( _seekControl.Interactive && OldAtControl == null )
+                    _seekControl.MouseIntoEvent( );
+
             }
-            if ( OldAtControl != null )
-                if ( control == null && OldAtControl.Interactive )
-                    OldAtControl.MouseLeaveEvent( );
+            if ( _seekControl == null && OldAtControl != null )
+                 OldAtControl.MouseLeaveEvent( );
         }
 
-         protected override void Draw( SpriteBatch spriteBatch )
+        protected override void Draw( SpriteBatch spriteBatch )
         {
             base.Draw( spriteBatch );
             for ( int Count = 0; Count < Controls.Count; Count++ )
