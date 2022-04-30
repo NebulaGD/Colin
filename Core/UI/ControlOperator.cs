@@ -75,11 +75,10 @@ namespace Colin.Core.UI
                     _seekControl.MouseRightUpEvent( );
                 if ( _seekControl.Interactive )
                     _seekControl.MouseHoverEvent( );
-                if ( _seekControl.Interactive && OldAtControl == null )
+                if ( _seekControl.Interactive && OldAtControl != _seekControl )
                     _seekControl.MouseIntoEvent( );
-
             }
-            if ( _seekControl == null && OldAtControl != null )
+            if ( _seekControl != OldAtControl && OldAtControl != null && !OldAtControl.Interactive )
                  OldAtControl.MouseLeaveEvent( );
         }
 

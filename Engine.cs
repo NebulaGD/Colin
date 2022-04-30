@@ -83,6 +83,8 @@ namespace Colin
             }
             Initialization( );
             Components.Add( InitializeScene( ) );
+            for ( int count = Components.Count - 1; count > 0 ; count-- )
+                ( Components[ count ] as GameComponent ).UpdateOrder = count;
             base.Initialize( );
         }
 

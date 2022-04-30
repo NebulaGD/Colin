@@ -31,13 +31,13 @@ namespace Colin
             ts.Fill( new T( ) );
         }
 
-        public void Initialize( )
+        public virtual void Initialize( )
         {
             for ( int count = 0; count < Objects.Length; count++ )
                 Objects[ count ].Initialize( );
         }
 
-        public void Update( GameTime gameTime )
+        public virtual void Update( GameTime gameTime )
         {
             if ( Empty )
                 return;
@@ -49,7 +49,7 @@ namespace Colin
             }
         }
 
-        public void Draw( GameTime gameTime )
+        public virtual void Draw( GameTime gameTime )
         {
             if ( Empty )
                 return;
@@ -63,12 +63,9 @@ namespace Colin
         /// <param name="index"></param>
         public void ActiveObject( int index )
         {
-            if ( Objects[ index ].Empty )
-            {
-                Objects[ index ].Empty = false;
-                Objects[ index ].ActiveIndex = ActiveList.Count;
-                ActiveList.Add( Objects[ index ] );
-            }
+            Objects[ index ].Empty = false;
+            Objects[ index ].ActiveIndex = ActiveList.Count;
+            ActiveList.Add( Objects[ index ] );
         }
 
         /// <summary>
@@ -83,6 +80,5 @@ namespace Colin
                 element.Empty = true;
             }
         }
-
     }
 }
